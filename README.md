@@ -97,7 +97,7 @@ macs2 callpeak -t ChIP.bam -c Control.bam -f BAM \
 
 ## Step 5: Differential analysis
 In this step, differentail gene lists and sites with differential H3K27ac levels under two conditions were obtained.   
-For RNA-seq, the "DESeq2_command.R" script can be used.  
+For RNA-seq, the "Up_lncRNAs_command.R" script can be used.  
 For ChIP-seq, the following command can be used:
 ```
 macs2 bdgdiff --t1 T1BDG --t2 T2BDG --c1 C1BDG --c2 C2BDG [-C CUTOFF] [-l MINLEN] [--d1 DEPTH1] [--d2 DEPTH2] --o-prefix OPREFIX 
@@ -115,8 +115,9 @@ macs2 bdgdiff --t1 T1BDG --t2 T2BDG --c1 C1BDG --c2 C2BDG [-C CUTOFF] [-l MINLEN
 
 
 ## Step 6: eRNA identification
-Up-regulated lncRNAs can be obtained using the `Up_lncRNAs_command.R` script.  
+Up-regulated lncRNAs can be obtained using the `Up_lncRNAs_command.R` script. 
 Genes can be annotated by H3K27ac using the `Annotation_command.R` script.  
 The identification of enhancer RNAs and bioinformatic prediction of eRNA-mRNA pairs can be performed using `e-finder.R` script.
+Please modify the parameters in the config1_lncRNA.txt or config2_e-finder.txt file and provide the gtf file of  corresponding species to suit your analysis.
 
 ## END

@@ -1,0 +1,24 @@
+condition=KCl3 KCl3 KCl3 KCl3 Veh Veh Veh Veh KCl3 KCl3 KCl3 KCl3 Veh Veh Veh Veh Veh KCl1 KCl6 Veh KCl1 KCl6 Veh KCl1 KCl6
+condition_levels=KCl6 KCl3 KCl1 Veh
+
+# Batch information. If there is no batch information or users want to skip the batch correction, set "batch=NA". The batch_level parameter will be ignored in this case.
+batch=PE PE PE PE PE PE PE PE PE PE PE PE PE PE PE PE SE SE SE SE SE SE SE SE SE
+batch_levels=PE SE
+
+min_nonzero_samples=7
+species=mouse
+gtf_file=gencode.vM25.annotation.gtf
+
+
+### input files
+# It is recommended to generate 'expr_matrix_comprehensive.txt' using featureCounts. See details in Step 4 at https://github.com/jz-Jiang/e-finder.
+expr_matrix_file=expr_matrix_comprehensive.txt
+
+# 'upregulated_lncRNAs.txt' was generated using 'Up_lncRNAs_command.R'
+lnc_up_file=upregulated_lncRNAs.txt
+
+# 'Inc_H3K27ac_ann_no_distal.txt' was generated using 'Annotation_command.R'
+lnc_H3K27ac_file=Inc_H3K27ac_ann_no_distal.txt
+
+### output file
+output_file=result_cor_25s_pearson.txt

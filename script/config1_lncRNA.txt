@@ -1,0 +1,16 @@
+# parameters required by 'Up_lncRNAs_command.R'
+expr_matrix_file=expr_matrix_count.txt
+colnames=Kcl1 Kcl2 Kcl3 Kcl4 Veh1 Veh2 Veh3 Veh4
+condition=Kcl Kcl Kcl Kcl Veh Veh Veh Veh
+condition_treatment=Kcl
+condition_control=Veh
+min_nonzero_samples=4
+species=mouse
+output_file=upregulated_lncRNAs.txt
+
+# parameters required by 'Annotation_command.R'
+anno_input=Inc_H3K27ac_distal_nobl.bed
+anno_output=Inc_H3K27ac_ann_no_distal.txt
+
+# parameter required by both 'Up_lncRNAs_command.R' and 'Annotation_command.R'
+gtf_file=gencode.vM25.annotation.gtf
