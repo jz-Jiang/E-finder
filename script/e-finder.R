@@ -13,7 +13,8 @@ library(ggpubr)
 
 
 # Read config file
-config <- readLines("config2_e-finder.txt")
+config <- readLines("config_e-finder.6.2.txt")
+config <- config[!grepl("^#", config)]
 config <- setNames(lapply(strsplit(config, "="), `[`, 2), sapply(strsplit(config, "="), `[`, 1))
 
 expr_matrix_file <- config$expr_matrix_file
@@ -28,7 +29,7 @@ if (!file.exists(config$gtf_file)) {
 }
 
 # Check for batch parameter
-if (tolower(trimws(config$batch)) == "na") {
+if (is.null(config$batch) || tolower(trimws(config$batch)) == "na") {
   batch <- NA
   batch_levels <- NA  
 } else {
@@ -50,13 +51,14 @@ eRNA <- intersect(lnc_up$gene_id , Inc_H3K27ac_ann_no_distal$geneId)
 exprSet <- read.table(expr_matrix_file, header = TRUE, sep = "\t", quote = "")
 sample_columns <- unlist(strsplit(config$condition, " "))
 num_samples <- length(sample_columns)
-mycounts <- exprSet[, 7:(6+num_samples)]
+config$colnum <- eval(parse(text=config$colnum))
+mycounts <- exprSet[, c(config$colnum)]
 rownames(mycounts) <- exprSet$Geneid
 mycounts <- mycounts[rowSums(mycounts >= 1) >= min_nonzero_samples,]
 
 
 # Create colData
-if (tolower(trimws(config$batch)) == "na") {
+if (is.null(config$batch) || tolower(trimws(config$batch)) == "na") {
   colData <- data.frame(row.names = colnames(mycounts), condition)
   design_formula <- ~ condition
 } else {
@@ -69,7 +71,7 @@ if (tolower(trimws(config$batch)) == "na") {
 dds <- DESeqDataSetFromMatrix(mycounts, colData, design = design_formula)
 vsd <- vst(dds)
 
-if (tolower(trimws(config$batch)) != "na") {
+if (!is.null(config$batch) && tolower(trimws(config$batch)) != "na") {
   p1 <- plotPCA(vsd, "batch")
   ggsave("PCA_batch.pdf", p1)
   assay(vsd) <- limma::removeBatchEffect(assay(vsd), vsd$batch)

@@ -1,11 +1,12 @@
-config <- readLines('config1_lncRNA.txt')
+#setwd("C:/Users/uqqzhao/UQ/4publication/202303_nascentRNAseq/e-finder/script")
+config <- readLines('config_lncRNA.6.1.txt')
+config <- config[!grepl("^#", config)]
 config <- setNames(lapply(strsplit(config, "="), `[`, 2), sapply(strsplit(config, "="), `[`, 1))
 
 # Check if GTF file exists
 if (!file.exists(config$gtf_file)) {
   stop(paste("The GTF file", config$gtf_file, "was not found. Please provide a valid GTF file in the configuration or download the appropriate file for your species."))
 }
-
 
 library(rtracklayer)
 library(AnnotationHub)
@@ -18,8 +19,8 @@ library(ggpubr)
 
 exprSet <- read.table(config$expr_matrix_file, header = TRUE, sep = "\t", quote = "")
 sample_columns <- unlist(strsplit(config$colnames, " "))
-num_samples <- length(sample_columns)
-mycounts <- exprSet[, (ncol(exprSet) - num_samples + 1):ncol(exprSet)]
+config$colnum <- eval(parse(text=config$colnum))
+mycounts <- exprSet[, c(config$colnum)]
 rownames(mycounts) <- exprSet$Geneid
 
 min_nonzero_samples <- as.numeric(config$min_nonzero_samples)

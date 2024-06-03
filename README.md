@@ -114,10 +114,13 @@ macs2 bdgdiff --t1 T1BDG --t2 T2BDG --c1 C1BDG --c2 C2BDG [-C CUTOFF] [-l MINLEN
 ```
 
 
-## Step 6: eRNA identification
-Up-regulated lncRNAs can be obtained using the `Up_lncRNAs_command.R` script. 
-Genes can be annotated by H3K27ac using the `Annotation_command.R` script.  
-The identification of enhancer RNAs and bioinformatic prediction of eRNA-mRNA pairs can be performed using `e-finder.R` script.
-Please modify the parameters in the config1_lncRNA.txt or config2_e-finder.txt file and provide the gtf file of  corresponding species to suit your analysis.
+## Step 6: eRNA Identification
+
+### 6.1 'Up_lncRNAs_command.R' & 'Annotation_command.R'
+Up-regulated lncRNAs can be identified using the `Up_lncRNAs_command.R` script. The H3K27ac peak regions (BED file) can be annotated using the `Annotation_command.R` script. Both `Up_lncRNAs_command.R` and `Annotation_command.R` use `config_lncRNA.6.1.txt` as the configuration file. Users need to copy this configuration file to the current working directory and specify the input file name, output file name, and parameters in `config_lncRNA.6.1.txt` to tailor the analysis.
+
+### 6.2 'e-finder.R'
+The identification of enhancer RNAs and the bioinformatic prediction of eRNA-mRNA pairs can be performed using the `e-finder.R` script. `e-finder.R` uses `config_e-finder.6.2.txt` as the configuration file. Users need to copy this configuration file to the current working directory and specify the input file name, output file name, and parameters in `config_e-finder.6.2.txt` to tailor the analysis.
+
 
 ## END

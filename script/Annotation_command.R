@@ -6,7 +6,8 @@ library(ChIPseeker)
 library(rtracklayer)
 library(TxDb.Mmusculus.UCSC.mm10.knownGene)
 
-config <- readLines('config1_lncRNA.txt')
+config <- readLines('config_lncRNA.6.1.txt')
+config <- config[!grepl("^#", config)]
 config <- setNames(lapply(strsplit(config, "="), `[`, 2), sapply(strsplit(config, "="), `[`, 1))
 
 # Check if the input BED file exists

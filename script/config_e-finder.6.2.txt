@@ -1,0 +1,30 @@
+### Parameters required by 'e-finder.R'
+## input files
+# It is recommended to generate 'expr_matrix_comprehensive.txt' using featureCounts. See details in Step 4 at https://github.com/jz-Jiang/e-finder.
+expr_matrix_file=expr_matrix_comprehensive.txt
+
+# 'upregulated_lncRNAs.txt' was generated using 'Up_lncRNAs_command.R'
+lnc_up_file=upregulated_lncRNAs.txt
+
+# 'Inc_H3K27ac_ann_no_distal.txt' was generated using 'Annotation_command.R'
+lnc_H3K27ac_file=Inc_H3K27ac_ann_no_distal.txt
+
+## output file
+output_file=result_cor_25s_pearson.txt
+
+# Specify the column numbers (1-indexed) for the count data in 'expr_matrix_file'. These can be non-continuous columns, for example, 'colnum=7:14, 20:23, 26:30, 32'
+# The example below specifies the count data from the 7th column to the 31st column (25 samples) in 'expr_matrix_file'
+colnum=7:31
+# Specify the names & conditions of your samples in the same order as the count data in 'expr_matrix_file'
+condition=KCl3 KCl3 KCl3 KCl3 Veh Veh Veh Veh KCl3 KCl3 KCl3 KCl3 Veh Veh Veh Veh Veh KCl1 KCl6 Veh KCl1 KCl6 Veh KCl1 KCl6
+condition_levels=KCl6 KCl3 KCl1 Veh
+
+# Batch information. If there is no batch information or users want to skip the batch correction, set "batch=NA". The batch_level parameter will be ignored in this case.
+batch=PE PE PE PE PE PE PE PE PE PE PE PE PE PE PE PE SE SE SE SE SE SE SE SE SE
+batch_levels=PE SE
+
+min_nonzero_samples=7
+gtf_file=gencode.vM25.annotation.gtf
+
+
+

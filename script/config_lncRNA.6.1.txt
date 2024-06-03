@@ -1,0 +1,28 @@
+### Parameters required by 'Up_lncRNAs_command.R'
+# Specify the input expression count matrix file. It is recommended to generate 'expr_matrix_file.txt' using featureCounts. See details in Step 4 at https://github.com/jz-Jiang/e-finder.
+expr_matrix_file=expr_matrix_count.txt
+
+# Specify the output file name
+output_file=upregulated_lncRNAs.txt
+
+# Specify the column numbers (1-indexed) for the count data in 'expr_matrix_file'. These can be non-continuous columns, for example, 'colnum=7:14, 20:23, 26:30, 32'
+# The example below specifies the count data from the 7th column to the 14th column (8 samples) in 'expr_matrix_file'
+colnum=7:14
+# Specify the names & conditions of your samples in the same order as the count data in 'expr_matrix_file'
+colnames=Kcl1 Kcl2 Kcl3 Kcl4 Veh1 Veh2 Veh3 Veh4
+condition=Kcl Kcl Kcl Kcl Veh Veh Veh Veh
+
+# Specify the treatment and control conditions
+condition_treatment=Kcl
+condition_control=Veh
+
+# To filter out extremely lowly expressed genes, we set a minimum threshold for the number of samples with nonzero counts. The parameter is defined as follows:
+min_nonzero_samples=4
+
+
+### Parameters required by 'Annotation_command.R'
+anno_input=Inc_H3K27ac_distal_nobl.bed
+anno_output=Inc_H3K27ac_ann_no_distal.txt
+
+### Parameters required by both 'Up_lncRNAs_command.R' and 'Annotation_command.R'
+gtf_file=gencode.vM25.annotation.gtf
