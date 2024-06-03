@@ -8,6 +8,11 @@ if (!file.exists(config$gtf_file)) {
   stop(paste("The GTF file", config$gtf_file, "was not found. Please provide a valid GTF file in the configuration or download the appropriate file for your species."))
 }
 
+# Check if the expression matrix file exists
+if (!file.exists(config$expr_matrix_file)) {
+  stop(paste("The expression matrix file", config$expr_matrix_file, "was not found. Please provide a valid expression matrix file in the current working directory."))
+}
+
 library(rtracklayer)
 library(AnnotationHub)
 library(stringr)

@@ -28,6 +28,21 @@ if (!file.exists(config$gtf_file)) {
   stop(paste("The GTF file", config$gtf_file, "was not found. Please provide a valid GTF file in the configuration or download the appropriate file for your species."))
 }
 
+# Check if the expression matrix file exists
+if (!file.exists(config$expr_matrix_file)) {
+  stop(paste("The expression matrix file", config$expr_matrix_file, "was not found. Please provide a valid expression matrix file in the current working directory."))
+}
+
+# Check if the up-regulated lncRNA file exists
+if (!file.exists(config$lnc_up_file)) {
+  stop(paste("The up-regulated lncRNA file", config$lnc_up_file, "was not found. Please provide it in the current working directory."))
+}
+
+# Check if the H3K27ac annotation file exists
+if (!file.exists(config$lnc_H3K27ac_file)) {
+  stop(paste("The H3K27ac annotation file", config$lnc_H3K27ac_file, "was not found. Please provide it in the current working directory."))
+}
+
 # Check for batch parameter
 if (is.null(config$batch) || tolower(trimws(config$batch)) == "na") {
   batch <- NA
@@ -55,7 +70,6 @@ config$colnum <- eval(parse(text=config$colnum))
 mycounts <- exprSet[, c(config$colnum)]
 rownames(mycounts) <- exprSet$Geneid
 mycounts <- mycounts[rowSums(mycounts >= 1) >= min_nonzero_samples,]
-
 
 # Create colData
 if (is.null(config$batch) || tolower(trimws(config$batch)) == "na") {
